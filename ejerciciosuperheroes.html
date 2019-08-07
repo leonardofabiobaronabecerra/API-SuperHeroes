@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+    h1{
+        text-align: center;
+    }
+    p{
+        text-align: center;
+    }
+    input::placeholder{
+        text-align: center;
+        color: rgba(117, 117, 111, 0.377);
+    }
+    div{
+        background-color: aqua;
+    }
+   #area p{
+       text-align: left;
+   }
+    </style>
+    <title>Super Heroes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+      <h1>Super Heroes</h1>
+      <p>
+        <input type="number" name="cod" id="cod" placeholder="'Ingrese el codigo'" size="20" class="form-control-sm">
+        <button id="btnconsul">Consultar</button>
+      </p>
+      <div id="area" class="heroes">
+
+      </div>
+    </div>
+<script>
+var consultar = document.getElementById("btnconsul");
+consultar.addEventListener("click",cargar);
+
+function cargar(){
+var idsp = document.getElementById("cod").value;
+    fetch("https://www.superheroapi.com/api.php/10218716531600048/"+idsp)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        var divc = document.getElementById("area");
+        var idh="";
+        var idhr ="";
+        idh = "<p><b>Nombre: </b>"+ data.name + "</p> ";
+        idh += "<p><b>Raza: </b>"+data.appearance.race+"</p>";
+        idh += "<p><b>Genero: </b>"+data.appearance.gender+"</p>";
+        idh += "<p><b>Ocupacion: </b>"+data.work.occupation+"</p>";
+        idh += "<img src='"+ data.image.url +"' width='500px' heigth='650px'/>"
+        idhr = idh;
+        divc.innerHTML = idhr;
+})
+}
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSXgi164MCGG3u5RKXaBGVBabmxQTVRAAVE5tDTq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
